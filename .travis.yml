@@ -1,0 +1,14 @@
+language: cpp
+compiler: 
+- clang
+script:
+  
+os:
+- osx
+
+before_install:
+- echo $LANG
+
+env:
+  global:
+  - LANG="en_US.UTF-8"
