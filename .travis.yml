@@ -1,8 +1,8 @@
 language: cpp
+script: make && make install
+
 compiler: 
-- clang
-script:
-  
+- clang++
 os:
 - osx
 
