@@ -1,28 +1,28 @@
-CLANG++ = clang++
-OBJ = main.o SortArithmetic.o BitTree.o CPPStack_.o
+CC = clang++
+
 CXXFLAGS = -std=c++11
 
 # Dir Variable
 ARIDIR = CITest/Arigthmetic/
 STRDIR = CITest/Structure/
 DIR = CITest/
+I = main.o SortArithmetic.o BitTree.o CPPStack_.o
+COMPILEDIR = CITest/dist/
+OBJ := $(addprefix $(COMPILEDIR), $(I))
+# TEST := $(addprefix src/,foo bar)
 
-# build 
 
-main: $(DIR)$(OBJ)
-	$(CLANG++) $(CXXFLAGS) -o main $(DIR)$(OBJ) && ./main
+exec: $(OBJ)
+	$(CC) $(CXXFLAGS) -o main $(OBJ) && ./main
+$(COMPILEDIR)%.o: $(DIR)%.cpp
+	@[ -d $(COMPILEDIR) ] || mkdir $(COMPILEDIR)
+	echo $^
+	$(CC) $(CXXFLAGS) -c $^ -o $@
+$(COMPILEDIR)%.o:$(ARIDIR)%.cpp
+	$(CC) $(CXXFLAGS) -c $^ -o $@
+$(COMPILEDIR)%.o:$(STRDIR)%.cpp
+	$(CC) $(CXXFLAGS) -c $^ -o $@
+# Success
 
-main.o: $(DIR)main.cpp
-	$(CLANG++) $(CXXFLAGS) -c main.cpp
-
-SortArithmetic.o: $(ARIDIR)SortArithmetic.cpp $(ARIDIR)SortArithmetic.h
-	$(CLANG++) $(CXXFLAGS) -c $(ARIDIR)SortArithmetic.cpp
-
-BitTree.o: $(STRDIR)BitTree.cpp $(STRDIR)BitTree.h $(STRDIR)Defines.h
-	$(CLANG++) $(CXXFLAGS) -c $(STRDIR)BitTree.cpp
-	
-CPPStack_.o: $(STRDIR)CPPStack_.cpp $(STRDIR)CPPStack_.h $(STRDIR)Defines.h
-	$(CLANG++) $(CXXFLAGS) -c $(STRDIR)CPPStack_.cpp
-	
 clean:
-	rm -rf $(DIR)*.o main
+	rm -rf main $(COMPILEDIR)
