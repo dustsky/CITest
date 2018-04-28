@@ -1,8 +1,12 @@
-BUILD_DIR = ./
+CLANG++ = clang++
+OBJ = main.o
+# CFLAGS  = -I CITest
 
-install: main.o
-	./main.o
+main: $(OBJ)
+	$(CLANG++)  -o main $(OBJ) && ./main
+
 main.o: main.cpp
-	clang++ -o main.o main.cpp
+	$(CLANG++) -c main.o
+	
 clean:
-	rm -rf *.o
+	rm -rf *.o main

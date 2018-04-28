@@ -1,14 +1,7 @@
+
 language: cpp
-script: make && make install
+compiler: clang++
 
-compiler: 
-- clang++
-os:
-- osx
-
-before_install:
-- echo $LANG
-
-env:
-  global:
-  - LANG="en_US.UTF-8"
+script: 
+  - CITest/make
+  
